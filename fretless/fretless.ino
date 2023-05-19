@@ -8,7 +8,8 @@ USBMIDI_Interface midi;
 int channel;
 analog_t raw1 = 0;
 analog_t raw2 = 0;
-
+int val;
+int pressed = 0;
  
 // Create a new instance of the class `CCPotentiometer`, called `potentiometer`,
 // on pin A0, that sends MIDI messages with controller 7 (channel volume)
@@ -22,7 +23,7 @@ A1, {MIDI_CC::Expression_Controller, CHANNEL_5}
 };
 
 // The filtered value read when potentiometer is at the 0% position
-constexpr analog_t minimumValue = 3300;
+constexpr analog_t minimumValue = 3000;
 // The filtered value read when potentiometer is at the 100% position
 constexpr analog_t maximumValue = 16383;
 
@@ -68,6 +69,15 @@ void loop() {
   // be fully processed before usbMIDI.read() is called again.
   
   midi.update();
+  val = analogRead(0);
+  if(val > 250 && pressed == 0) {
+    usbMIDI.sendNoteOn(60, 66, 1);
+    pressed = 1;
+  }
+  if(val < 250 && pressed == 1) {
+    usbMIDI.sendNoteOff(60,66,1);
+    pressed = 0;
+  }
   Control_Surface.loop(); 
 
   

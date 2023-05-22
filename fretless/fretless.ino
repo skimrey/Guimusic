@@ -30,29 +30,29 @@ int pressed4 = 0;
 // Create a new instance of the class `CCPotentiometer`, called `potentiometer`,
 // on pin A0, that sends MIDI messages with controller 7 (channel volume)
 // on channel 1.
-CCPotentiometer potentiometer {
-A1, {MIDI_CC::Modulation_Wheel, CHANNEL_1}
+PBPotentiometer potentiometer {
+A1, CHANNEL_1
 };
 CCPotentiometer potentiometer1 {
 A0, {MIDI_CC::Expression_Controller, CHANNEL_1}
 };
 
-CCPotentiometer potentiometer2 {
-A3, {MIDI_CC::Modulation_Wheel, CHANNEL_2}
+PBPotentiometer potentiometer2 {
+A3, CHANNEL_2
 };
 CCPotentiometer potentiometer3 {
 A2, {MIDI_CC::Expression_Controller, CHANNEL_2}
 };
 
-CCPotentiometer potentiometer4 {
-A5, {MIDI_CC::Modulation_Wheel, CHANNEL_3}
+PBPotentiometer potentiometer4 {
+A5, CHANNEL_3
 };
 CCPotentiometer potentiometer5 {
 A4, {MIDI_CC::Expression_Controller, CHANNEL_3}
 };
 
-CCPotentiometer potentiometer6 {
-A7, {MIDI_CC::Modulation_Wheel, CHANNEL_4}
+PBPotentiometer potentiometer6 {
+A7, CHANNEL_4
 };
 CCPotentiometer potentiometer7 {
 A6, {MIDI_CC::Expression_Controller, CHANNEL_4}
@@ -163,15 +163,16 @@ void loop() {
   val5 = analogRead(5);
   val6 = analogRead(6);
   val7 = analogRead(7);
-  if(pressed1 == 0 && val > 666) {
+  if(pressed1 == 0 && val > 100) {
     usbMIDI.sendNoteOn(52, 66, 1);
     pressed1 = 1;
   }
+ 
   if(pressed1 == 1 && val < 100) {
     usbMIDI.sendNoteOff(52,66,1);
     pressed1 = 0;
   }
-    if(pressed2 == 0 && val2 > 666) {
+    if(pressed2 == 0 && val2 > 100) {
     usbMIDI.sendNoteOn(59, 66, 2);
     pressed2 = 1;
   }
@@ -179,7 +180,7 @@ void loop() {
     usbMIDI.sendNoteOff(59,66,2);
     pressed2 = 0;
   }
-    if(pressed3 == 0 && val4 > 666) {
+    if(pressed3 == 0 && val4 > 100) {
     usbMIDI.sendNoteOn(66, 66, 3);
     pressed3 = 1;
   }
@@ -187,7 +188,7 @@ void loop() {
     usbMIDI.sendNoteOff(66,66,3);
     pressed3 = 0;
   }
-      if(pressed4 == 0 && val6 > 666) {
+      if(pressed4 == 0 && val6 > 100) {
     
     usbMIDI.sendNoteOn(73, 66, 4);
     pressed4 = 1;

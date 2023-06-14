@@ -3,28 +3,6 @@
 // Instantiate a MIDI over USB interface.
 USBMIDI_Interface midi;
 
-
-int channel;
-analog_t raw1 = 0;
-analog_t raw2 = 0;
-analog_t raw3 = 0;
-analog_t raw4 = 0;
-analog_t raw5 = 0;
-analog_t raw6 = 0;
-analog_t raw7 = 0;
-analog_t raw8 = 0;
-int val;
-int val1;
-int val2;
-int val3;
-int val4;
-int val5;
-int val6;
-int val7;
-int pressed1 = 0;
-int pressed2 = 0;
-int pressed3 = 0;
-int pressed4 = 0;
  
 // Create a new instance of the class `CCPotentiometer`, called `potentiometer`,
 // on pin A0, that sends MIDI messages with controller 7 (channel volume)
